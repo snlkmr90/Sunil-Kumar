@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_model extends CI_Model
 {
 	public function adminLogin($email,$password){
-		$query = $this->db->select('email as admin_email,id as admin_id,username as admin_username')
+		$query = $this->db->select('email,id,username')
 		->from('users')
 		->where('email',$email)
 		->where('password',$password)

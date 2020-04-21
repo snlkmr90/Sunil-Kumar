@@ -15,13 +15,12 @@ class Admin extends CI_Controller {
 	}
 	public function dashboard()
 	{
-		print_r($this->session->userdata);
-		die;
-		/*if (!$this->session->userdata('admin_id'))
+
+		if (!$this->session->userdata('admin_id'))
 		{
 			// redirect them to the login page
 			redirect('adminaccess', 'refresh');
-		}*/
+		}
 		$this->template->load('admin/layout/common','admin/dashboard');
 	}
 	public function adminaccess()
@@ -41,11 +40,12 @@ class Admin extends CI_Controller {
 			$md5pass = md5($password); 
 			$loginData = $this->admin_model->adminLogin($email,$md5pass);
 			if($loginData){
-				$this->session->set_userdata($loginData);
-				redirect('admin/dashboard');
+				$loginSession = ['admin_email'=>$loginData->email,'admin_id'=>$loginData->id,'admin_username'=>$loginData->username];
+				$this->session->set_userdata($loginSession);
+				redirect('admin/dashboard','refresh');
 			}else{
 				$this->session->set_flashdata('userNotFound', 'User does not exists! Please check you credentials or contact admin');
-				redirect('adminaccess');	
+				redirect('adminaccess','refresh');	
 			}
 		}
 		
