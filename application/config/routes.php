@@ -52,7 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*Backend*/
 
-$route['adminaccess'] = 'admin/admin/index';
+$route['adminaccess'] = 'admin/admin/adminaccess';
+$route['admin/dashboard'] = 'admin/admin/dashboard';
 $route['list-products'] = 'admin/product/list_products';
 $route['add-product'] = 'admin/product/add_product';
 $route['edit-product'] = 'admin/product/edit_product';
