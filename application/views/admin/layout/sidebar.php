@@ -1,93 +1,78 @@
-<!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="<?= base_url(); ?>/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?= base_url(); ?>/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <?php /* <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
+<?php $seg1 = $this->uri->segment(1);
+      $seg2 = $this->uri->segment(2);
+      $seg3 = $this->uri->segment(3);
+      
+ ?>
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+  <!-- BEGIN SIDEBAR -->
+  <div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+      <!-- BEGIN SIDEBAR MENU -->
+      <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+      <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+      <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+      <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+      <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+      <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+      <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+        <li class="sidebar-toggler-wrapper">
+          <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+          <div class="sidebar-toggler">
+          </div>
+          <!-- END SIDEBAR TOGGLER BUTTON -->
+        </li>
+        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+        <li class="sidebar-search-wrapper">
+          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+          <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+          <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+          <form class="sidebar-search " action="extra_search.html" method="POST">
+            <a href="javascript:;" class="remove">
+            <i class="icon-close"></i>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li> */ ?>
-          
-          <li class="nav-item">
-            <a href="./index.html" class=" nav-link active">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-              
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Products
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url(); ?>add-product" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Product</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url(); ?>list-products" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Product</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+              <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+              </span>
+            </div>
+          </form>
+          <!-- END RESPONSIVE QUICK SEARCH FORM -->
+        </li>
+        <li class="start <?= ($seg2=='dashboard')?'active open':'';?>">
+          <a href="<?= base_url('admin/dashboard'); ?>">
+          <i class="icon-home"></i>
+          <span class="title">Dashboard</span>
+          <span class="<?= ($seg2=='dashboard')?'selected':'';?>"></span>
+          <?php /*<span class="arrow open"></span>*/?>
+          </a>
+        </li>
+        <li class="<?= ($seg2=='add-product' || $seg2=='list-products' || $seg2=='edit-product' )?'open':'';?>">
+          <a href="javascript:;">
+          <i class="icon-basket"></i>
+          <span class="title">Products</span>
+          <span class="arrow <?= ($seg2=='add-product' || $seg2=='list-products' || $seg2=='edit-product' )?'open':'';?>"></span>
+          </a>
+          <ul class="sub-menu" <?= ($seg2=='add-product' || $seg2=='list-products')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='add-product')?'active':'';?>">
+              <a href="<?= base_url('products/add-product'); ?>">
+              <i class="icon-home"></i>
+              Add Product</a>
+            </li>
+            <li class="<?= ($seg2=='list-products')?'active':'';?>">
+              <a href="<?= base_url('products/list-products'); ?>">
+              <i class="icon-basket"></i>
+              List Products</a>
+            </li>
+          </ul>
+        </li>
+      <!-- END SIDEBAR MENU -->
     </div>
-    <!-- /.sidebar -->
-  </aside>
+  </div>
+  <!-- END SIDEBAR -->

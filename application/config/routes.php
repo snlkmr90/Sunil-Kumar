@@ -54,9 +54,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['adminaccess'] = 'admin/admin/adminaccess';
 $route['admin/dashboard'] = 'admin/admin/dashboard';
-$route['list-products'] = 'admin/product/list_products';
-$route['add-product'] = 'admin/product/add_product';
-$route['edit-product'] = 'admin/product/edit_product';
+$route['admin/logout'] = 'admin/admin/logout';
+$route['admin/forgotpassword'] = 'admin/admin/forgotpassword';
+$route['products/list-products'] = 'admin/product/list_products';
+$route['products/add-product'] = 'admin/product/add_product';
+$route['products/edit-product'] = 'admin/product/edit_product';
 
 
 
