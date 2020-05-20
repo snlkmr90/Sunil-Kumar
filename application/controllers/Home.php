@@ -7,10 +7,11 @@ class Home extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//	$this->load->library(array('template'));
+			$this->load->library(array('template'));
 	}
 	public function index()
 	{
-		$this->load->view('admin/index.html');
+		//$this->load->view('admin/index');
+		$this->template->load('front/layout/common','front/home');
 	}
 }

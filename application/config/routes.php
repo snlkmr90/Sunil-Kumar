@@ -56,13 +56,49 @@ $route['adminaccess'] = 'admin/admin/adminaccess';
 $route['admin/dashboard'] = 'admin/admin/dashboard';
 $route['admin/logout'] = 'admin/admin/logout';
 $route['admin/forgotpassword'] = 'admin/admin/forgotpassword';
-$route['products/list-products'] = 'admin/product/list_products';
-$route['products/add-product'] = 'admin/product/add_product';
-$route['products/edit-product'] = 'admin/product/edit_product';
+
+/*Category*/
+$route['category/list-category'] = 'admin/category/list_category';
+$route['category/list-category/(:num)'] = 'admin/category/list_category/$1';
+$route['category/add-category'] = 'admin/category/add_category';
+$route['category/edit-category'] = 'admin/category/edit_category';
+$route['category/edit-category/(:num)'] = 'admin/category/edit_category/$1';
+$route['category/resetCategoryFilter'] = 'admin/category/resetCategoryFilter';
+/*--------*/
+
+/*Posts*/
+$route['post/list-post'] = 'admin/post/list_post';
+$route['post/list-post/(:num)'] = 'admin/post/list_post/$1';
+$route['post/add-post'] = 'admin/post/add_post';
+$route['post/edit-post'] = 'admin/post/edit_post';
+$route['post/edit-post/(:num)'] = 'admin/post/edit_post/$1';
+$route['post/resetPostFilter'] = 'admin/post/resetPostFilter';
+/*-----*/
+
 
 
 
 /*----------*/
+
+/*Frontend*/
+/*for category dynamic urls*/
+require_once(BASEPATH .'database/DB'. EXT);
+$db =& DB();
+$query = $db->get( 'blog_category' );
+$result = $query->result();
+ //echo"<pre>";print_r($result);exit;
+foreach( $result as $row )
+{
+	if(stripos($row->cat_slug, '-')){
+		$controllerName = str_replace('-', '_', $row->cat_slug);
+	}else{
+		$controllerName = $row->cat_slug;
+	}
+    $route[ $row->cat_slug ]                 = $controllerName;
+    $route[ $row->cat_slug.'/(:num)' ]       = $controllerName.'/$1';
+}
+/*for category dynamic urls*/
+/*--------*/
 
 
 $route['default_controller'] = 'home';

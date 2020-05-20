@@ -52,13 +52,14 @@
 <script src="<?= base_url() ?>assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <script src="<?= base_url() ?>assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
-Demo.init(); // init demo features
+   Demo.init(); // init demo features
    Index.init();   
    Index.initDashboardDaterange();
    Index.initJQVMAP(); // init index page's custom scripts
@@ -68,7 +69,18 @@ Demo.init(); // init demo features
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
 });
+
 </script>
+
+<script type="text/javascript">
+      jQuery(document).ready(function($){
+         $('#cat_created_to').datepicker({format: 'yyyy-mm-dd'});
+         $('#cat_created_from').datepicker({format: 'yyyy-mm-dd'});
+         $('#post_created_from').datepicker({format: 'yyyy-mm-dd'});
+         $('#post_created_to').datepicker({format: 'yyyy-mm-dd'});
+
+      });
+   </script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

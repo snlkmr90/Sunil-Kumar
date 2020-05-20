@@ -11,15 +11,15 @@ class Admin extends CI_Controller {
 			$this->load->library(['form_validation','email']);
 			$this->load->model(['admin/admin_model']);
 
-			if (!$this->session->userdata('admin_id') && $this->uri->segment(1) != 'adminaccess')
+	}
+	public function dashboard()
+	{
+		if ($this->session->userdata('admin_id') == null)
 			{
 				// redirect them to the login page
 				redirect('adminaccess', 'refresh');
 				exit();
 			}
-	}
-	public function dashboard()
-	{
 		$this->template->load('admin/layout/common','admin/dashboard');
 	}
 	public function adminaccess()

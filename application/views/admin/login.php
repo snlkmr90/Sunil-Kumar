@@ -522,7 +522,7 @@ jQuery(document).ready(function($) {
       var forgetpassemail = $('input[name="forgetpassemail"').val();
       
       $.ajax({
-        url:'<?=base_url();?>/admin/forgotpassword',
+        url:'<?=base_url();?>admin/forgotpassword',
         method:'POST',
         data:{forgetpassemail:forgetpassemail},
         dataType:'json',

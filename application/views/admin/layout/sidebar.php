@@ -53,22 +53,41 @@
           <?php /*<span class="arrow open"></span>*/?>
           </a>
         </li>
-        <li class="<?= ($seg2=='add-product' || $seg2=='list-products' || $seg2=='edit-product' )?'open':'';?>">
+        <li class="<?= ($seg2=='add-category' || $seg2=='list-category' || $seg2=='edit-category' )?'open':'';?>">
           <a href="javascript:;">
           <i class="icon-basket"></i>
-          <span class="title">Products</span>
-          <span class="arrow <?= ($seg2=='add-product' || $seg2=='list-products' || $seg2=='edit-product' )?'open':'';?>"></span>
+          <span class="title">Category</span>
+          <span class="arrow <?= ($seg2=='add-category' || $seg2=='list-category' || $seg2=='edit-category' )?'open':'';?>"></span>
           </a>
-          <ul class="sub-menu" <?= ($seg2=='add-product' || $seg2=='list-products')?'style="display:block"':'';?>>
-            <li class="<?= ($seg2=='add-product')?'active':'';?>">
-              <a href="<?= base_url('products/add-product'); ?>">
+          <ul class="sub-menu" <?= ($seg2=='add-category' || $seg2=='list-category')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='add-category')?'active':'';?>">
+              <a href="<?= base_url('category/add-category'); ?>">
               <i class="icon-home"></i>
-              Add Product</a>
+              Add Category</a>
             </li>
-            <li class="<?= ($seg2=='list-products')?'active':'';?>">
-              <a href="<?= base_url('products/list-products'); ?>">
+            <li class="<?= ($seg2=='list-category')?'active':'';?>">
+              <a href="<?= base_url('category/list-category'); ?>">
               <i class="icon-basket"></i>
-              List Products</a>
+              List Category</a>
+            </li>
+          </ul>
+        </li>
+        <li class="<?= ($seg2=='add-post' || $seg2=='list-post' || $seg2=='edit-post' )?'open':'';?>">
+          <a href="javascript:;">
+          <i class="icon-basket"></i>
+          <span class="title">Posts</span>
+          <span class="arrow <?= ($seg2=='add-post' || $seg2=='list-post' || $seg2=='edit-post' )?'open':'';?>"></span>
+          </a>
+          <ul class="sub-menu" <?= ($seg2=='add-post' || $seg2=='list-post')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='add-post')?'active':'';?>">
+              <a href="<?= base_url('post/add-post'); ?>">
+              <i class="icon-home"></i>
+              Add Posts</a>
+            </li>
+            <li class="<?= ($seg2=='list-post')?'active':'';?>">
+              <a href="<?= base_url('post/list-post'); ?>">
+              <i class="icon-basket"></i>
+              List Posts</a>
             </li>
           </ul>
         </li>
