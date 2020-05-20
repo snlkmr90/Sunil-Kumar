@@ -166,7 +166,7 @@
       <!-- BEGIN PAGE CONTENT-->
       <div class="row">
         <div class="col-md-12">
-            <?= form_open(base_url()."post/edit-post/$post_id",'class="form-horizontal form-row-seperated"');?>
+            <?= form_open_multipart(base_url()."post/edit-post/$post_id",'class="form-horizontal form-row-seperated"');?>
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
@@ -241,7 +241,46 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-md-2 control-label">Post Description:
+                          <label class="col-md-2 control-label">Category: <span class="required">
+                          * </span> 
+                          </label>
+                          <div class="col-md-10">
+                            <?php 
+                            $options = array();
+                            $options[''] = "--Select--";
+                            foreach($categories as $cat)
+                            {
+                              $options[$cat->cat_id] = $cat->cat_name;
+                            }
+                             
+                             echo form_dropdown('post_cat', $options, (isset($posts[0]->post_cat) && $posts[0]->post_cat !=null )?$posts[0]->post_cat:set_value('post_cat'),'class="table-group-action-input form-control"'); ?>
+                             <?=form_error('post_cat','<p class="text-danger">','</p>');?>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">Featured(?): 
+                          </label>
+                          <div class="col-md-10">
+                            <?php $options = [
+                                    'name'    => 'post_featured',
+                                    'value'   => '1',
+                                    'checked' => (isset($posts[0]->post_featured) && $posts[0]->post_featured !=null )?$posts[0]->post_featured:set_checkbox('post_featured', 1, false),
+                                    'class'=>"form-control"
+                            ]; ?>
+                            <?= form_checkbox($options); ?>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">Featured Image: 
+                          </label>
+                          <div class="col-md-10">
+                            <input type="file" name="post_feat_img">
+                            <?= isset($imguperror)?$imguperror:"";?>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">Post Description: <span class="required">
+                          * </span>
                           </label>
                           <div class="col-md-10">
                             <?php
@@ -254,7 +293,7 @@
                                 'class'=>"form-control"
                             );
                              echo form_textarea($options); ?>
-                             <?php //echo display_ckeditor($ckeditor); ?>
+                             <?=form_error('post_description','<p class="text-danger">','</p>');?>
                           </div>
                         </div>
                         <div class="form-group">
@@ -337,5 +376,5 @@ var editor = CKEDITOR.replace( 'editpostdesc', {
     filebrowserImageUploadUrl : '/guestblogss/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
     filebrowserFlashUploadUrl : '/guestblogss/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 });
-CKFinder.setupCKEditor( editor);
+CKFinder.setupCKEditor(editor);
 </script>

@@ -10,7 +10,7 @@ class Post extends CI_Controller {
 			$this->load->library('template');
 			$this->load->helper(['url','form','ckeditor_helper']);
 			$this->load->library(['form_validation','pagination','CKEditor','CKFinder']);
-			$this->load->model(['admin/post_model']);
+			$this->load->model(['admin/post_model','admin/category_model']);
 			if (!$this->session->userdata('admin_id') && $this->uri->segment(1) != 'adminaccess')
 			{
 				// redirect them to the login page
@@ -63,33 +63,20 @@ class Post extends CI_Controller {
 	}
 	public function add_post()
 	{
-		$this->ckfinder->SetupCKEditor($this->ckeditor,'assets/ckfinder/');
-		//Ckeditor's configuration
-		$this->data['ckeditor'] = array(
- 
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'postdesc',
-			'path'	=>	'assets/ckeditor',
- 
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
- 
-			)
-			
-		);
-
+		$data['categories'] = $this->category_model->list_category('','','',''); 
 		$this->form_validation->set_rules('post_name', 'post name', 'trim|required');
+		$this->form_validation->set_rules('post_cat', 'post category', 'trim|required');
+		$this->form_validation->set_rules('post_description', 'post description', 'trim|required');
 		if ($this->form_validation->run() === FALSE) {
-			$this->template->load('admin/layout/common','admin/post/add-post',$this->data);
+			$this->template->load('admin/layout/common','admin/post/add-post',$data);
 		} else {
 			
 			    $catData['post_name'] = $this->input->post('post_name',TRUE);
 			    $delimiter ='-';
 			    $catData['post_slug'] = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $catData['post_name']))))), $delimiter));
 			    $catData['post_description'] = $this->input->post('post_description',TRUE);
+			    $catData['post_cat'] = $this->input->post('post_cat',TRUE);
+			    $catData['post_featured'] = $this->input->post('post_featured',TRUE);
 			    $catData['post_meta_title'] = $this->input->post('post_meta_title',TRUE);
 			    $catData['post_keyword'] = $this->input->post('post_keyword',TRUE);
 			    $catData['post_meta_desc'] = $this->input->post('post_meta_desc',TRUE);
@@ -106,38 +93,51 @@ class Post extends CI_Controller {
 	}
 	public function edit_post($postid)
 	{ 
-		$this->ckfinder->SetupCKEditor($this->ckeditor,'/assets/ckfinder/');
-		//Ckeditor's configuration
-		$data['ckeditor'] = array(
- 
-			//ID of the textarea that will be replaced
-			'id' 	=> 	'editpostdesc',
-			'path'	=>	'assets/ckeditor',
- 
-			//Optionnal values
-			'config' => array(
-				'toolbar' 	=> 	"Full", 	//Using the Full toolbar
-				'width' 	=> 	"100%",	//Setting a custom width
-				'height' 	=> 	'100px',	//Setting a custom height
- 
-			)
-			
-		);
+		$data['imguperror'] = '';
 		$data['posts'] = $this->post_model->list_post($config["per_page"]=null, $page=null,$searchdata=null,$postid);
+		$data['categories'] = $this->category_model->list_category('','','',''); 
 		$data['post_id'] = $postid;
 		$this->form_validation->set_rules('post_name', 'post name', 'trim|required');
+		$this->form_validation->set_rules('post_cat', 'post category', 'trim|required');
+		$this->form_validation->set_rules('post_description', 'post description', 'trim|required');
 		if ($this->form_validation->run() === FALSE) 
 		{
 			$this->template->load('admin/layout/common','admin/post/edit-post',$data);
 		} 
 		else 
 		{
+			if($_FILES['post_feat_img']['name'] != ''){
+			$uppath = './assets/'.'uploads/';
+			if(!is_dir($uppath)){
+	    		mkdir($uppath,0775,TRUE);
+	    	}
+	        $config['upload_path'] = $uppath;
+	        $config['allowed_types'] = 'gif|jpg|png';
+	        $config['max_size'] = 2000;
+	        $ext = explode(".", $_FILES["post_feat_img"]["name"]);
+	        $new_name = uniqid().'.'.end($ext);
+			$config['file_name'] = $new_name;
+	        $this->load->library('upload', $config);
+	        if (!$this->upload->do_upload('post_feat_img')) {
+            	$data['imguperror'] = $this->upload->display_errors();
+            	$this->template->load('admin/layout/common','admin/post/edit-post',$data);
+	        } else {
+	            if($this->upload->data()){
+	            	$this->resize($uppath, $new_name);
+	            }
+	        }
+	    	}
+	        die;
+	        if($data['error']=='')
+	        {
 			    $catData['post_name'] = $this->input->post('post_name',TRUE);
 			    $delimiter ='-';
 			    $catData['post_slug'] = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $catData['post_name']))))), $delimiter));
 			    $catData['post_description'] = $this->input->post('post_description',TRUE);
 			    $catData['post_meta_title'] = $this->input->post('post_meta_title',TRUE);
+			    $catData['post_featured'] = $this->input->post('post_featured',TRUE);
 			    $catData['post_keyword'] = $this->input->post('post_keyword',TRUE);
+			    $catData['post_cat'] = $this->input->post('post_cat',TRUE);
 			    $catData['post_meta_desc'] = $this->input->post('post_meta_desc',TRUE);
 			    $catData['post_status'] = $this->input->post('post_status',TRUE);
 				$catData['post_updated_at'] = date('Y-m-d H:i:s');
@@ -146,6 +146,37 @@ class Post extends CI_Controller {
 			    	$this->session->set_flashdata('post_update_success', 'post Updated Successfully');
 			    	redirect(base_url()."post/edit-post/$postid");
 			    }
+			}
 		}
+	}
+	public function resize($path, $file)
+	{ 
+	    $width = array(200, 70);
+	    $height = array(200, 70);
+	    $resizepath = array('200x200', '70x70');
+	    $this->load->library('image_lib');
+	    $i=0;
+	    foreach($resizepath as $rpath)
+	    { 
+	    	$uppath = $path.$resizepath[$i];
+	    	if(!is_dir($uppath)){
+	    		mkdir($uppath,0775,TRUE);
+	    	}
+	       $config['image_library']    = 'gd2';
+	       $config['source_image']     = $path;
+	       $config['create_thumb']     = true;
+	       $config['maintain_ratio']   = true;
+	       $config['width']            = $width[$i];
+	       $config['height']           = $height[$i];   
+	       echo $config['new_image']        = $uppath.'/'.$file;
+
+	       $this->image_lib->clear();
+	       $this->image_lib->initialize($config);
+	       if($this->image_lib->resize())
+	       {
+	       	return true;
+	       }
+	       $i++;
+	    }
 	}
 }
