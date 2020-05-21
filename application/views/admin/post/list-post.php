@@ -68,10 +68,13 @@
 								<thead>
 								<tr role="row" class="heading">
 									<th width="15%">
-										 post&nbsp;Name
+										 Post&nbsp;Name
 									</th>
 									<th width="15%">
-										 post Status
+										 Post Category
+									</th>
+									<th width="15%">
+										 Post Status
 									</th>
 									<th width="15%">
 										 Date&nbsp;Created
@@ -85,6 +88,19 @@
 									<td>
 										<input type="text" class="form-control form-filter input-sm" name="post_name" value="<?= isset($admin_post_filter)?$admin_post_filter['post_name']:''; ?>">
 									</td>
+									<td>
+									<?php 
+			                            $options = array();
+			                            $options[''] = "Select";
+			                            foreach($categories as $cat)
+			                            {
+			                              $options[$cat->cat_id] = $cat->cat_name;
+			                            }
+			                             
+			                             echo form_dropdown('post_cat', $options, (isset($admin_post_filter['post_cat']) && $admin_post_filter['post_cat'] !=null )?$admin_post_filter['post_cat']:set_value('post_cat'),'class="table-group-action-input form-control"'); 
+                             		?>
+                             		</td>
+
 									<td>
 										<?php 
 				                            $options = [
@@ -131,10 +147,13 @@
 										 ID
 									</th>
 									<th width="15%">
-										 post&nbsp;Name
+										 Post&nbsp;Name
 									</th>
 									<th width="15%">
-										 post Status
+										 Post Category
+									</th>
+									<th width="15%">
+										 Post Status
 									</th>
 									<th width="15%">
 										 Date&nbsp;Created
@@ -150,6 +169,7 @@
 											<tr>
 											<td><?= $post->post_id;?></td>
 											<td><?= $post->post_name;?></td>
+											<td><?= $post->cat_name;?></td>
 											<td><?= ($post->post_status !=null && $post->post_status ==1 )?'<span class="alert-success">Active</span>':'<span class="text-danger">Inactive</span>';?></td>
 											<td><?= $post->post_created_at;?></td>
 											<td>

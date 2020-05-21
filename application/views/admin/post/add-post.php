@@ -166,7 +166,7 @@
       <!-- BEGIN PAGE CONTENT-->
       <div class="row">
         <div class="col-md-12">
-            <?= form_open('','class="form-horizontal form-row-seperated"');?>
+            <?= form_open_multipart('','class="form-horizontal form-row-seperated"');?>
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
@@ -230,6 +230,14 @@
                                     'class'=>"form-control"
                             ]; ?>
                             <?= form_checkbox($options); ?>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">Featured Image: 
+                          </label>
+                          <div class="col-md-10">
+                            <input type="file" name="post_feat_img">
+                            <?= isset($imguperror)?str_replace('<p>', '<p class="text-danger">', $imguperror):''; ?>
                           </div>
                         </div>
                         <div class="form-group">

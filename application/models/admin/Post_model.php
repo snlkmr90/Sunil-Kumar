@@ -20,11 +20,15 @@ class Post_model extends CI_Model
 	public function list_post($perpage, $page,$searchdata,$catid)
 	{
 		
-		$this->db->select('*');
-		$this->db->from('blog_post');
+		$this->db->select('p.*,c.cat_name');
+		$this->db->from('blog_post p');
+		$this->db->join('blog_category c','c.cat_id = p.post_cat');
 		if($searchdata){
 			if($searchdata['post_name']!=''){
 				$this->db->like('post_name',$searchdata['post_name']);
+			}
+			if($searchdata['post_cat'] != ''){
+				$this->db->where('post_cat',$searchdata['post_cat']);
 			}
 			if($searchdata['post_status'] != ''){
 				$this->db->where('post_status',$searchdata['post_status']);

@@ -61,12 +61,12 @@
           </a>
           <ul class="sub-menu" <?= ($seg2=='add-category' || $seg2=='list-category')?'style="display:block"':'';?>>
             <li class="<?= ($seg2=='add-category')?'active':'';?>">
-              <a href="<?= base_url('category/add-category'); ?>">
+              <a href="<?= base_url('admin/category/add-category'); ?>">
               <i class="icon-home"></i>
               Add Category</a>
             </li>
             <li class="<?= ($seg2=='list-category')?'active':'';?>">
-              <a href="<?= base_url('category/list-category'); ?>">
+              <a href="<?= base_url('admin/category/list-category'); ?>">
               <i class="icon-basket"></i>
               List Category</a>
             </li>

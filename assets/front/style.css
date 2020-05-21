@@ -1674,3 +1674,37 @@ hr.invis3 {
     -o-border-radius: 50%;
     border-radius: 50%
 }
+.pagination > li > a
+{
+    background-color: #0275d8!important;
+    color: white!important;
+    padding: 10px;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a!important;
+    background-color: #eee!important;
+    border-color: #ddd!important;
+}
+
+.pagination > .active > a
+{
+    color: white!important;
+    background-color: #5A4181!important;
+    border: solid 1px #5A4181!important;
+    padding:10px;
+}
+
+.pagination > .active > a:hover
+{
+    color:#0275d8!important;
+    background-color: #5A4181!important;
+    border: solid 1px #5A4181!important;
+}
+.commentErr{
+    color:red;
+}

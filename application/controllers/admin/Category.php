@@ -31,7 +31,7 @@ class Category extends CI_Controller {
 			$this->session->set_userdata('admin_cat_filter',$searchdata);
 			$data['admin_cat_filter'] =  $this->session->userdata('admin_cat_filter');
 		}
-        $config["base_url"] = base_url() . "category/list-category";
+        $config["base_url"] = base_url() . "admin/category/list-category";
         $config["per_page"] = 10;
         $config["uri_segment"] = 3;
         $config['full_tag_open'] = "<ul class='pagination'>";
@@ -59,7 +59,7 @@ class Category extends CI_Controller {
 	}
 	public function resetCategoryFilter(){
 		$this->session->unset_userdata('admin_cat_filter');
-		redirect(base_url().'category/list-category','refresh');
+		redirect(base_url().'admin/category/list-category','refresh');
 	}
 	public function add_category()
 	{
@@ -80,7 +80,7 @@ class Category extends CI_Controller {
 			    $insertstatus = $this->category_model->add_category($catData);
 			    if($insertstatus){
 			    	$this->session->set_flashdata('cat_add_success', 'Category Added Successfully');
-			    	redirect(base_url().'category/list-category');
+			    	redirect(base_url().'admin/category/list-category');
 			    }
 
 		}
@@ -109,7 +109,7 @@ class Category extends CI_Controller {
 				$updatestatus = $this->category_model->edit_category($catData,$catid);
 			    if($updatestatus){
 			    	$this->session->set_flashdata('cat_update_success', 'Category Updated Successfully');
-			    	redirect(base_url()."category/edit-category/$catid");
+			    	redirect(base_url()."admin/category/edit-category/$catid");
 			    }
 		}
 	}

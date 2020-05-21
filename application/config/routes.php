@@ -58,12 +58,12 @@ $route['admin/logout'] = 'admin/admin/logout';
 $route['admin/forgotpassword'] = 'admin/admin/forgotpassword';
 
 /*Category*/
-$route['category/list-category'] = 'admin/category/list_category';
-$route['category/list-category/(:num)'] = 'admin/category/list_category/$1';
-$route['category/add-category'] = 'admin/category/add_category';
-$route['category/edit-category'] = 'admin/category/edit_category';
-$route['category/edit-category/(:num)'] = 'admin/category/edit_category/$1';
-$route['category/resetCategoryFilter'] = 'admin/category/resetCategoryFilter';
+$route['admin/category/list-category'] = 'admin/category/list_category';
+$route['admin/category/list-category/(:num)'] = 'admin/category/list_category/$1';
+$route['admin/category/add-category'] = 'admin/category/add_category';
+$route['admin/category/edit-category'] = 'admin/category/edit_category';
+$route['admin/category/edit-category/(:num)'] = 'admin/category/edit_category/$1';
+$route['admin/category/resetCategoryFilter'] = 'admin/admin/category/resetCategoryFilter';
 /*--------*/
 
 /*Posts*/
@@ -102,5 +102,9 @@ foreach( $result as $row )
 
 
 $route['default_controller'] = 'home';
+$route['(:num)'] = 'home/index/$1';
+$route['category/(:any)'] = 'category/index/$1';
+$route['blog/(:any)'] = 'blog/index/$1';
+$route['postcomment'] = 'home/postcomment';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

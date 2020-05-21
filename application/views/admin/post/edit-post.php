@@ -275,7 +275,11 @@
                           </label>
                           <div class="col-md-10">
                             <input type="file" name="post_feat_img">
-                            <?= isset($imguperror)?$imguperror:"";?>
+                            <?php if(isset($posts[0]->post_feat_img) && file_exists('./assets/uploads/255x212/'.$posts[0]->post_feat_img)){?>
+                              <div><img height='100' width='100' src="<?= base_url('assets/uploads/255x212/').$posts[0]->post_feat_img;?>"></div>
+                            <?php }?>
+                            
+                            <?= isset($imguperror)?str_replace('<p>', '<p class="text-danger">', $imguperror):''; ?>
                           </div>
                         </div>
                         <div class="form-group">

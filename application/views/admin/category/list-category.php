@@ -114,7 +114,7 @@
 											<?= form_hidden('filtercat', '1'); ?>
 											<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
 										</div>
-										<a class="btn btn-sm red filter-cancel" href='<?= base_url('category/resetCategoryFilter');?>'><i class="fa fa-times"></i> Reset</a>
+										<a class="btn btn-sm red filter-cancel" href='<?= base_url('admin/category/resetCategoryFilter');?>'><i class="fa fa-times"></i> Reset</a>
 									</td>
 								</tr>
 								<?= form_close();?>
@@ -154,7 +154,7 @@
 											<td><?= $category->cat_created_at;?></td>
 											<td>
 												<div class="margin-bottom-5">
-													<a class="btn btn-sm blue filter-submit margin-bottom" href="<?= base_url('category/edit-category/').$category->cat_id; ?>"><i class="fa fa-edit"></i> Edit </a>
+													<a class="btn btn-sm blue filter-submit margin-bottom" href="<?= base_url('admin/category/edit-category/').$category->cat_id; ?>"><i class="fa fa-edit"></i> Edit </a>
 												</div>
 											</td>
 										</tr>

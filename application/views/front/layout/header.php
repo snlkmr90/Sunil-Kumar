@@ -9,10 +9,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Site Metas -->
-    <title>Tech Blog - Stylish Magazine Blog Template</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <?php if($this->router->class=='blog' && $this->router->method=='index'){?>
+        <?php if($get_post_data){ ?>
+      <title><?php echo $get_post_data->post_meta_title;?></title>
+      <meta name="keywords" content="<?= $get_post_data->post_keyword; ?>">
+      <meta name="description" content="<?= $get_post_data->post_meta_desc; ?>">
+      <meta property="og:url"           content="<?= base_url(uri_string()); ?>" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="<?= $get_post_data->post_meta_title; ?>" />
+      <meta property="og:description"   content="<?= $get_post_data->post_meta_desc; ?>" />
+      <meta property="og:image"         content="<?= base_url().'assets/uploads/325x270/'.$get_post_data->post_feat_img; ?>" />
+    <?php }else{?>
+      <title>GuestBlogss - Create|Post|Deploy </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+    <?php } ?>
+
+    <?php }else{ ?>
+      <title>GuestBlogss - Create|Post|Deploy </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+    <?php } ?>
     
     <!-- Site Icons -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -416,22 +433,17 @@
                                     </li>
                                 </ul>
                             </li> */ ?>
-                            
+                            <?php if($header_menu_categories){ foreach($header_menu_categories as $menu_cats){?>
                             <li class="nav-item">
-                                <a class="nav-link" href="tech-category-01.html">Gadgets</a>
-                            </li>                   
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-02.html">Videos</a>
+                                <a class="nav-link" href="<?= base_url().'category/'.$menu_cats->cat_slug;?>"><?= $menu_cats->cat_name;?></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-03.html">Reviews</a>
-                            </li>
+                            <?php } } ?>                   
 
                             <li class="nav-item">
                                 <a class="nav-link" href="tech-contact.html">Contact Us</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav mr-2">
+                        <?php /* <ul class="navbar-nav mr-2">
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fa fa-rss"></i></a>
                             </li>
@@ -441,7 +453,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fa fa-apple"></i></a>
                             </li>
-                        </ul>
+                        </ul> */?>
                     </div>
                 </nav>
             </div><!-- end container-fluid -->

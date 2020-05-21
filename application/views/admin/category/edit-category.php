@@ -166,7 +166,7 @@
       <!-- BEGIN PAGE CONTENT-->
       <div class="row">
         <div class="col-md-12">
-            <?= form_open(base_url()."category/edit-category/$cat_id",'class="form-horizontal form-row-seperated"');?>
+            <?= form_open(base_url()."admin/category/edit-category/$cat_id",'class="form-horizontal form-row-seperated"');?>
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
