@@ -6,3 +6,8 @@ RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+#bellow code remove index.php from website
+
+#RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+#RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]

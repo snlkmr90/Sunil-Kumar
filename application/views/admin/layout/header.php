@@ -69,7 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
   <div class="page-header-inner">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-      <a href="index.html">
+      <a href="<?= base_url('admin/dashboard'); ?>">
       <img src="<?= base_url() ?>assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
       </a>
       <div class="menu-toggler sidebar-toggler hide">
@@ -83,6 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN TOP NAVIGATION MENU -->
     <div class="top-menu">
       <ul class="nav navbar-nav pull-right">
+        <?php /*
         <!-- BEGIN NOTIFICATION DROPDOWN -->
         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
         <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
@@ -380,6 +381,7 @@ License: You must have a valid license purchased only from themeforest(the above
           </ul>
         </li>
         <!-- END TODO DROPDOWN -->
+        */ ?>
         <!-- BEGIN USER LOGIN DROPDOWN -->
         <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
         <li class="dropdown dropdown-user">
@@ -391,21 +393,21 @@ License: You must have a valid license purchased only from themeforest(the above
           </a>
           <ul class="dropdown-menu dropdown-menu-default">
             <li>
-              <a href="extra_profile.html">
+              <a href="#">
               <i class="icon-user"></i> My Profile </a>
             </li>
             <li>
-              <a href="page_calendar.html">
+              <a href="#">
               <i class="icon-calendar"></i> My Calendar </a>
             </li>
             <li>
-              <a href="inbox.html">
+              <a href="#">
               <i class="icon-envelope-open"></i> My Inbox <span class="badge badge-danger">
               3 </span>
               </a>
             </li>
             <li>
-              <a href="page_todo.html">
+              <a href="#">
               <i class="icon-rocket"></i> My Tasks <span class="badge badge-success">
               7 </span>
               </a>
@@ -413,7 +415,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <li class="divider">
             </li>
             <li>
-              <a href="extra_lock.html">
+              <a href="#">
               <i class="icon-lock"></i> Lock Screen </a>
             </li>
             <li>

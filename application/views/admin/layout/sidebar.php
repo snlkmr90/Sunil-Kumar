@@ -32,7 +32,7 @@
           <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
           <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
           <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-          <form class="sidebar-search " action="extra_search.html" method="POST">
+          <form class="sidebar-search" method="POST">
             <a href="javascript:;" class="remove">
             <i class="icon-close"></i>
             </a>
@@ -88,6 +88,48 @@
               <a href="<?= base_url('post/list-post'); ?>">
               <i class="icon-basket"></i>
               List Posts</a>
+            </li>
+          </ul>
+        </li>
+        <li class="<?= ($seg2=='list-comments' || $seg2=='view-comment' )?'open':'';?>">
+          <a href="javascript:;">
+          <i class="icon-basket"></i>
+          <span class="title">Comments</span>
+          <span class="arrow <?= ( $seg2=='list-comments' || $seg2=='view-comment' )?'open':'';?>"></span>
+          </a>
+          <ul class="sub-menu" <?= ($seg2=='list-comments' || $seg2=='view-comment')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='list-comments')?'active':'';?>">
+              <a href="<?= base_url('comments/list-comments'); ?>">
+              <i class="icon-basket"></i>
+              List Comments</a>
+            </li>
+          </ul>
+        </li>
+        <li class="<?= ($seg2=='list-contact' || $seg2=='view-contact' )?'open':'';?>">
+          <a href="javascript:;">
+          <i class="icon-basket"></i>
+          <span class="title">Quick Contact</span>
+          <span class="arrow <?= ( $seg2=='list-contact' || $seg2=='view-contact' )?'open':'';?>"></span>
+          </a>
+          <ul class="sub-menu" <?= ($seg2=='list-contact' || $seg2=='view-contact')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='list-contact')?'active':'';?>">
+              <a href="<?= base_url('contact/list-contact'); ?>">
+              <i class="icon-basket"></i>
+              List Contacts</a>
+            </li>
+          </ul>
+        </li>
+        <li class="<?= ($seg2=='list-writeus' || $seg2=='view-writeus' )?'open':'';?>">
+          <a href="javascript:;">
+          <i class="icon-basket"></i>
+          <span class="title">Writeus Contacts</span>
+          <span class="arrow <?= ( $seg2=='list-writeus' || $seg2=='view-writeus' )?'open':'';?>"></span>
+          </a>
+          <ul class="sub-menu" <?= ($seg2=='list-writeus' || $seg2=='view-writeus')?'style="display:block"':'';?>>
+            <li class="<?= ($seg2=='list-writeus')?'active':'';?>">
+              <a href="<?= base_url('writeus/list-writeus'); ?>">
+              <i class="icon-basket"></i>
+              List Writeus</a>
             </li>
           </ul>
         </li>

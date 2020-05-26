@@ -75,8 +75,28 @@ $route['post/edit-post/(:num)'] = 'admin/post/edit_post/$1';
 $route['post/resetPostFilter'] = 'admin/post/resetPostFilter';
 /*-----*/
 
+/*Comments*/
+$route['comments/list-comments'] = 'admin/comments/list_comments';
+$route['comments/list-comments/(:num)'] = 'admin/comments/list_comments/$1';
+$route['comments/update-comment/(:num)/(:num)'] = 'admin/comments/update_comment/$1/$2';
+$route['comments/resetcommentfilter'] = 'admin/comments/resetcommentfilter';
+/*-----*/
 
+/*Contact*/
+$route['contact/list-contact'] = 'admin/contact/list_contact';
+$route['contact/list-contact/(:num)'] = 'admin/contact/list_contact/$1';
+$route['contact/delete-contact/(:num)'] = 'admin/contact/delete_contact/$1';
+$route['contact/view-contact/(:num)'] = 'admin/contact/view_contact/$1';
+$route['contact/resetcontactfilter'] = 'admin/contact/resetcontactfilter';
+/*-----*/
 
+/*Writeus*/
+$route['writeus/list-writeus'] = 'admin/writeus/list_writeus';
+$route['writeus/list-writeus/(:num)'] = 'admin/writeus/list_writeus/$1';
+$route['writeus/delete-writeus/(:num)/(:num)'] = 'admin/writeus/delete_writeus/$1/$2';
+$route['writeus/view-writeus/(:num)'] = 'admin/writeus/view_writeus/$1';
+$route['writeus/resetwriteusfilter'] = 'admin/writeus/resetwriteusfilter';
+/*-----*/
 
 /*----------*/
 
@@ -106,5 +126,9 @@ $route['(:num)'] = 'home/index/$1';
 $route['category/(:any)'] = 'category/index/$1';
 $route['blog/(:any)'] = 'blog/index/$1';
 $route['postcomment'] = 'home/postcomment';
+$route['save-contact'] = 'home/save_contact';
+$route['save-writeus'] = 'home/save_writeus';
+$route['write-for-us'] = 'home/write_for_us';
+$route['contact-us'] = 'home/contact_us';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

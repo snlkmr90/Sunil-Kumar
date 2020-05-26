@@ -159,7 +159,7 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
   </form>
   <!-- END FORGOT PASSWORD FORM -->
-  <!-- BEGIN REGISTRATION FORM -->
+  <?php /* <!-- BEGIN REGISTRATION FORM -->
   <form class="register-form" action="index.html" method="post">
     <h3>Sign Up</h3>
     <p>
@@ -478,7 +478,7 @@ License: You must have a valid license purchased only from themeforest(the above
       </button>
     </div>
   </form>
-  <!-- END REGISTRATION FORM -->
+  <!-- END REGISTRATION FORM --> */ ?>
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->

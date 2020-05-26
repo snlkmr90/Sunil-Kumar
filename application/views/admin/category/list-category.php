@@ -31,15 +31,15 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?= base_url().'admin/dashboard'; ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">eCommerce</a>
+						<a href="<?= base_url().'admin/category/list-category'; ?>">Category</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Category</a>
+						<a href="#">List Category</a>
 					</li>
 				</ul>
 			</div>
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-container">
+							<div class="table-container" style="overflow-x:auto;">
 								<table class="table table-striped table-bordered table-hover" id="datatable_products">
 								<thead>
 								<tr role="row" class="heading">
@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-container">
+							<div class="table-container" style="overflow-x:auto;">
 								<table class="table table-striped table-bordered table-hover" id="datatable_products">
 								<thead>
 								<tr role="row" class="heading">

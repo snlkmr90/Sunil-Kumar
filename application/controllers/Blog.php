@@ -12,8 +12,13 @@ class Blog extends CI_Controller {
 			$this->load->library(['form_validation','email','pagination']);
 			$this->load->model(['blog_model']);
 	}
-	public function index($postslug)
+	public function index($postslug ='')
 	{
+		if (!$postslug)
+			{				// redirect them to the login page
+				redirect(base_url(), 'refresh');
+				exit();
+			}
 		$data['get_post_data']=$this->blog_model->get_post_data($postslug);
 		$post_id = $data['get_post_data']->post_id;
 
@@ -29,12 +34,18 @@ class Blog extends CI_Controller {
 		$data['post_you_may_likes']=$this->blog_model->post_you_may_like($post_id);
 		$data['comments']=$this->blog_model->get_comments($post_id);
 		$data['comment_count']=$this->blog_model->get_comment_count($post_id);
-		$data['view_count']=$this->blog_model->get_views_count($post_id);
-		
+		$view_count_obj=$this->blog_model->get_views_count($post_id);
+	    $data['view_count'] = $view_count_obj->totalviews;
 		$this->template->load('front/layout/common','front/blog-single',$data);
 	}
-	public function category($cat_slug)
+	public function category($cat_slug='')
 	{
+		if (!$cat_slug)
+			{				// redirect them to the login page
+				redirect(base_url(), 'refresh');
+				exit();
+			}
 		$this->template->load('front/layout/common','front/blog-category');	
+
 	} 
 }

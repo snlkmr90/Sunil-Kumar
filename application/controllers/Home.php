@@ -9,8 +9,8 @@ class Home extends CI_Controller {
 		parent::__construct();
 			$this->load->library(['template']);
 			$this->load->helper(['url','form']);
-			$this->load->library(['form_validation','email','pagination']);
-			$this->load->model(['home_model']);
+			$this->load->library(['form_validation','pagination','parser']);
+			$this->load->model(['home_model','blog_model']);
 	}
 	public function index()
 	{
@@ -49,11 +49,90 @@ class Home extends CI_Controller {
 			$commentdata['comment_email']   =  $this->input->post('commentemail');
 			$commentdata['comment_text']    = $this->input->post('commenttext');
 			$commentdata['comment_posted_at']    = date('Y-m-d H:i:s');
-			$postcomment = $this->home_model->postcomment($commentdata);
-			if($postcomment)
-			{
-				$commentpost['success'] = 'true';
+			if($this->input->post){
+				$postcomment = $this->home_model->postcomment($commentdata);
+				if($postcomment)
+				{
+					$commentpost['success'] = 'true';
+				}
 			}
 			echo json_encode($commentpost);
+	}
+	public function contact_us()
+	{
+			$this->template->load('front/layout/common','front/contact-us');
+	}
+	public function write_for_us()
+	{
+			$this->template->load('front/layout/common','front/write-for-us');
+	}
+	public function save_contact()
+	{
+			$contactpost['success'] = 'false';
+            $contactdata['contact_subject'] = $this->input->post('contactsubject',TRUE);
+            $contactdata['contact_name'] =  $this->input->post('contactname',TRUE);
+            $contactdata['contact_email']   =  $this->input->post('contactemail',TRUE);
+            $contactdata['contact_phone']    = $this->input->post('contactphone',TRUE);
+            $contactdata['contact_message']    = $this->input->post('contactmessage',TRUE);
+            $contactdata['contact_recieved_at']    = date('Y-m-d H:i:s');
+                $postcontact = $this->home_model->postcontact($contactdata);
+                if($postcontact)
+                {
+                	    $config = Array(
+                	       'protocol' => 'smtp',
+						  'smtp_host' => 'mail.guestblogss.com',
+						  'smtp_port' => 587,
+						  'smtp_user' => 'admin@guestblogss.com', // change it to yours
+						  'smtp_pass' => 'Q6&.&SBcav,l', // change it to yours
+						  'mailtype' => 'html',
+						  'charset' => 'iso-8859-1',
+						  'wordwrap' => TRUE
+						);
+
+					      $message = $this->parser->parse('email/contact',$contactdata,TRUE);
+					      $this->load->library('email', $config);
+					      $this->email->set_newline("\r\n");
+					      $this->email->from('admin@guestblogss.com'); // change it to yours
+					      $this->email->to($contactdata['contact_email']);// change it to yours
+					      $this->email->subject('Quick Contact- GuestBlogss');
+					      $this->email->message($message);
+					      $this->email->send();
+                    $contactpost['success'] = 'true';
+                }
+            echo json_encode($contactpost);
+	}
+	public function save_writeus()
+	{
+			$writeuspost['success'] = 'false';
+            $writeusdata['writeus_subject'] = $this->input->post('writeussubject',TRUE);
+            $writeusdata['writeus_name'] =  $this->input->post('writeusname',TRUE);
+            $writeusdata['writeus_email']   =  $this->input->post('writeusemail',TRUE);
+            $writeusdata['writeus_message']    = $this->input->post('writeusmessage',TRUE);
+            $writeusdata['writeus_recieved_at']    = date('Y-m-d H:i:s');
+                $postwriteus = $this->home_model->postwriteus($writeusdata);
+                if($postwriteus)
+                {
+                	    $config = Array(
+                	       'protocol' => 'smtp',
+						  'smtp_host' => 'mail.guestblogss.com',
+						  'smtp_port' => 587,
+						  'smtp_user' => 'admin@guestblogss.com', // change it to yours
+						  'smtp_pass' => 'Q6&.&SBcav,l', // change it to yours
+						  'mailtype' => 'html',
+						  'charset' => 'iso-8859-1',
+						  'wordwrap' => TRUE
+						);
+
+					      $message = $this->parser->parse('email/writeus',$writeusdata,TRUE);
+					      $this->load->library('email', $config);
+					      $this->email->set_newline("\r\n");
+					      $this->email->from('admin@guestblogss.com'); // change it to yours
+					      $this->email->to($writeusdata['writeus_email']);// change it to yours
+					      $this->email->subject('Write For Us- GuestBlogss');
+					      $this->email->message($message);
+					      $this->email->send();
+                    $writeuspost['success'] = 'true';
+                }
+            echo json_encode($writeuspost);
 	}
 }

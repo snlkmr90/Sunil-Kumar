@@ -4,8 +4,8 @@
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="widget">
-                            <div class="footer-text text-left">
-                                <a href="index.html"><img src="images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
+                            <div class="text-left">
+                                <a href="<?= base_url(); ?>"><img src="<?=base_url('assets/front/')?>images/favicon32x32.png" alt="" class="img-fluid"></a>
                                 <p>GuestBlogss is a blogging/guest posting website. There are various categories to read posts about.</p>
                                 <div class="social">
                                     <a target="_blank" href="https://www.facebook.com/GuestBlogss-100617495007814" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
@@ -48,7 +48,7 @@
                                 <ul>
                                     <li><a href="#">About us</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Guest Blogging</a></li>
+                                    <li><a href="<?= base_url('write-for-us'); ?>">Guest Blogging</a></li>
                                 </ul>
                             </div><!-- end link-widget -->
                         </div><!-- end widget -->
@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <br>
-                        <div class="copyright">&copy; GuestBlogss. Design: <a href="https://GuestBlogss.com">HTML Design</a>.</div>
+                        <div class="copyright">&copy; GuestBlogss: <a href="https://GuestBlogss.com">HTML Design</a>.</div>
                     </div>
                 </div>
             </div><!-- end container -->
@@ -72,7 +72,7 @@
     ================================================== -->
     <script src="<?=base_url();?>assets/front/js/jquery.min.js"></script>
     <script src="<?=base_url();?>assets/front/js/tether.min.js"></script>
-    <script src="<?=base_url();?>assets/front/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script src="<?=base_url();?>assets/front/js/custom.js"></script>
     <?php if ($this->uri->segment(1)=='blog'){ ?>
         <script>
@@ -132,6 +132,156 @@
                           {        
                            ;
                             $('#commentloader').hide();
+                          },
+
+
+                    });
+                }
+
+
+            });
+        </script>
+    <?php } ?>
+    <?php if ($this->uri->segment(1)=='contact-us'){ ?>
+        <script>
+            $('#contactform').submit(function(e){
+                e.preventDefault();
+                $('.contactErr').remove();
+                var contactname = $('#contactname').val();
+                var contactemail = $('#contactemail').val();
+                var contactphone = $('#contactphone').val();
+                var contactsubject = $('#contactsubject').val();
+                var contactmessage = $('#contactmessage').val();
+
+                var nameregex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
+                var emailregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var contactError = 0;
+                if(contactname=='')
+                {
+                    $('#contactname').after('<p class="contactErr">Name field is Required</p>');
+                    contactError = 1;
+                }
+                if(contactemail=='')
+                {
+                    $('#contactemail').after('<p class="contactErr">Email field is required</p>');
+                    contactError = 1;
+                }else if(!contactemail.match(emailregex)){
+                    
+                    $('#contactemail').after('<p class="contactErr">Please enter a valid email !</p>');
+                    contactError = 1;
+                }
+                if(contactmessage=='')
+                {
+                    $('#contactmessage').after('<p class="contactErr">Message field is required</p>');
+                    contactError = 1;
+                }
+                if(contactphone.length !== 10 || isNaN(contactphone)){
+                    $('#contactphone').after('<p class="contactErr">Phone field should have 10 digit value. </p>');
+                    contactError = 1;   
+                }
+                if(contactsubject=='')
+                {
+                    $('#contactsubject').after('<p class="contactErr">Subject field is required</p>');
+                    contactError = 1;
+                }
+                if(contactError == 0)
+                {
+                    $.ajax({
+                        url:'<?=base_url().'save-contact';?>',
+                        data:{contactname:contactname,contactemail:contactemail,contactmessage:contactmessage,contactphone:contactphone,contactsubject:contactsubject},
+                        type:'POST',
+                        dataType: 'JSON',
+                        beforeSend:function(data){
+                           $('#contactloader').show();
+                        },
+                        success:function(data){
+                            if(data.success=='true'|| data.success==true){
+                                $('#contactmessage').after('<p class="text-success bg-secondary contactsuccess">Thankyou for contacting us. We will get back to you soon !</p>');
+                                setTimeout(function(){ $('.contactsuccess').fadeOut();  }, 8000);
+                              $('#contactform').trigger('reset');  
+                            }
+                            
+                        },
+                        complete:function(data){
+                           $('#contactloader').hide();
+                        },
+                        error: function(data)
+                          {        
+                           ;
+                            $('#contactloader').hide();
+                          },
+
+
+                    });
+                }
+
+
+            });
+        </script>
+    <?php } ?>
+    <?php if ($this->uri->segment(1)=='write-for-us'){ ?>
+    <script>
+            
+            $('#writeusform').submit(function(e){
+                e.preventDefault();
+                $('.writeusErr').remove();
+                var writeusname = $('#writeusname').val();
+                var writeusemail = $('#writeusemail').val();
+                var writeussubject = $('#writeussubject').val();
+                var writeusmessage = $('#writeusmessage').val();
+
+                var nameregex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
+                var emailregex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var writeusError = 0;
+                if(writeusname=='')
+                {
+                    $('#writeusname').after('<p class="writeusErr">Name field is Required</p>');
+                    writeusError = 1;
+                }
+                if(writeusemail=='')
+                {
+                    $('#writeusemail').after('<p class="writeusErr">Email field is required</p>');
+                    writeusError = 1;
+                }else if(!writeusemail.match(emailregex)){
+                    
+                    $('#writeusemail').after('<p class="writeusErr">Please enter a valid email !</p>');
+                    writeusError = 1;
+                }
+                if(writeusmessage=='')
+                {
+                    $('#writeusmessage').after('<p class="writeusErr">Message field is required</p>');
+                    writeusError = 1;
+                }
+                if(writeussubject=='')
+                {
+                    $('#writeussubject').after('<p class="writeusErr">Subject field is required</p>');
+                    writeusError = 1;
+                }
+                if(writeusError == 0)
+                {
+                    $.ajax({
+                        url:'<?=base_url().'save-writeus';?>',
+                        data:{writeusname:writeusname,writeusemail:writeusemail,writeusmessage:writeusmessage,writeussubject:writeussubject},
+                        type:'POST',
+                        dataType: 'JSON',
+                        beforeSend:function(data){
+                           $('#writeusloader').show();
+                        },
+                        success:function(data){
+                            if(data.success=='true'|| data.success==true){
+                                $('#writeusmessage').after('<p class="text-success bg-secondary writeussuccess">Thankyou for contacting us. We will get back to you soon !</p>');
+                                setTimeout(function(){ $('.writeussuccess').fadeOut();  }, 8000);
+                              $('#writeusform').trigger('reset');  
+                            }
+                            
+                        },
+                        complete:function(data){
+                           $('#writeusloader').hide();
+                        },
+                        error: function(data)
+                          {        
+                           ;
+                            $('#writeusloader').hide();
                           },
 
 

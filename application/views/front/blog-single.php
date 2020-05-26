@@ -26,7 +26,7 @@
                                     <ul class="list-inline">
                                         <li>
                                             <div class="fb-share-button" data-href="<?= base_url(uri_string()); ?>" data-layout="button_count" data-size="large">
-                                        <a class="fb-button btn btn-primary" target="_blank" href="https://www.facebook.com/sharer/sharer.php?app_id=2610053399228391&sdk=joey&u=<?=base_url(uri_string());?>&display=popup&ref=plugin&src=share_button" onclick="window.open(this.href,'facebook-share-dialog','width=626,height=436');return false;"><i class="fa fa-facebook"></i><span class="down-mobile">Share on Facebook</span></a>
+                                        <a class="fb-button btn btn-primary" target="_blank" href="https://www.facebook.com/sharer/sharer.php?app_id=2635273296713528&sdk=joey&u=<?=base_url(uri_string());?>&display=popup&ref=plugin&src=share_button" onclick="window.open(this.href,'facebook-share-dialog','width=626,height=436');return false;"><i class="fa fa-facebook"></i><span class="down-mobile">Share on Facebook</span></a>
                                        </div>
 
                                         </li>
@@ -38,7 +38,7 @@
                             </div><!-- end title -->
 
                             <div class="single-post-media">
-                                <img src="upload/tech_menu_08.jpg" alt="" class="img-fluid">
+                                <img src="<?php echo base_url().'assets/uploads/825x474/'.$get_post_data->post_feat_img; ?>" alt="" class="img-fluid">
                             </div><!-- end media -->
 
                             <div class="blog-content">
@@ -141,7 +141,7 @@
 
                                     </div><!-- end col -->
                                 </div><!-- end row -->
-                            </div><!-- end author-box --> */?>
+                            </div><!-- end author-box --> */ ?>
 
                             <hr class="invis1">
 
@@ -150,11 +150,11 @@
                                 <div class="row">
                                     <?php if($post_you_may_likes){ foreach($post_you_may_likes as $post_you_may_like){?> 
                                     <div class="col-lg-6">
-                                        <div class="blog-box">
+                                        <div class="border-custom blog-box">
                                             <div class="post-media">
                                                 <a href="<?= $post_you_may_like->post_slug; ?>" title="">
                                                     <?php if(isset($post_you_may_like->post_feat_img) && file_exists('./assets/uploads/255x212/'.$post_you_may_like->post_feat_img)){ ?>
-                                                        <img src="<?php echo base_url().'/assets/uploads/825x474/'.$post_you_may_like->post_feat_img; ?>" alt="" class="img-fluid">
+                                                        <img src="<?php echo base_url().'/assets/uploads/325x270/'.$post_you_may_like->post_feat_img; ?>" alt="" class="img-fluid">
                                                         <?php } ?>
                                                     <div class="hovereffect">
                                                         <span class=""></span>
@@ -228,52 +228,16 @@
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
-                            <div class="widget">
-                                <div class="banner-spot clearfix">
-                                    <div class="banner-img">
-                                        <img src="upload/banner_07.jpg" alt="" class="img-fluid">
-                                    </div><!-- end banner-img -->
-                                </div><!-- end banner -->
-                            </div><!-- end widget -->
 
-                            <div class="widget">
-                                <h2 class="widget-title">Popular Posts</h2>
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 justify-content-between">
-                                                <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">5 Beautiful buildings you need..</h5>
-                                                <small>12 Jan, 2016</small>
-                                            </div>
-                                        </a>
+                            <?php $this->load->view('front/common-sidebar'); ?>
 
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 justify-content-between">
-                                                <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Let's make an introduction for..</h5>
-                                                <small>11 Jan, 2016</small>
-                                            </div>
-                                        </a>
-
-                                        <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                            <div class="w-100 last-item justify-content-between">
-                                                <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid float-left">
-                                                <h5 class="mb-1">Did you see the most beautiful..</h5>
-                                                <small>07 Jan, 2016</small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
-
-                            <div class="widget">
+                            <?php /* <div class="widget">
                                 <div class="banner-spot clearfix">
                                     <div class="banner-img">
                                         <img src="upload/banner_03.jpg" alt="" class="img-fluid">
                                     </div><!-- end banner-img -->
                                 </div><!-- end banner -->
-                            </div><!-- end widget -->
+                            </div><!-- end widget --> */ ?>
                         </div><!-- end sidebar -->
                     </div><!-- end col -->
                 </div><!-- end row -->

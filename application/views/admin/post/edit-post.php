@@ -127,7 +127,7 @@
         <ul class="page-breadcrumb">
           <li>
             <i class="fa fa-home"></i>
-            <a href="index.html">Home</a>
+            <a href="<?= base_url('admin/dashboard'); ?>">Home</a>
             <i class="fa fa-angle-right"></i>
           </li>
           <li>
@@ -293,7 +293,7 @@
                                 'name' => 'post_description',
                                 'rows' => '2',
                                 'cols' => '50',
-                                'value'=> $post_description,
+                                'value'=> htmlspecialchars_decode($post_description),
                                 'class'=>"form-control"
                             );
                              echo form_textarea($options); ?>
@@ -373,12 +373,12 @@
     <script type="text/javascript">
 var editor = CKEDITOR.replace( 'editpostdesc', {
     extraPlugins: 'uploadimage,image2',
-    filebrowserBrowseUrl : '/guestblogss/assets/ckfinder/ckfinder.html',
-    filebrowserImageBrowseUrl : '/guestblogss/assets/ckfinder/ckfinder.html?type=Images',
-    filebrowserFlashBrowseUrl : '/guestblogss/assets/ckfinder/ckfinder.html?type=Flash',
-    filebrowserUploadUrl : '/guestblogss/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-    filebrowserImageUploadUrl : '/guestblogss/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-    filebrowserFlashUploadUrl : '/guestblogss/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+    filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
+    filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?type=Images',
+    filebrowserFlashBrowseUrl : '/assets/ckfinder/ckfinder.html?type=Flash',
+    filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 });
-CKFinder.setupCKEditor(editor);
+CKFinder.setupCKEditor(editor, '../' );
 </script>

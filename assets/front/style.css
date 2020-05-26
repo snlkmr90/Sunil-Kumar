@@ -1705,6 +1705,35 @@ hr.invis3 {
     background-color: #5A4181!important;
     border: solid 1px #5A4181!important;
 }
-.commentErr{
+.commentErr,.contactErr,.writeusErr{
     color:red;
+}
+.headerlogo{
+    position: absolute;
+    left: 26px;
+}
+.feat-post-home{
+    padding-left: 5px;
+}
+.border-custom{
+    border: 1px solid lightgray;
+    padding: 15px 0px;
+    margin: 0px;
+    border-radius: 0.50em;
+}
+.feat-img-outer 
+{
+border: 1px solid lightgray;
+border-radius: 0.50em;
+}
+.popular-post-border{
+    border: 1px solid lightgray;
+    border-radius: 0.25em;
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+}
+@media screen and (min-width: 981px) {
+  .feat-img {
+    height: 208px;
+  }
 }

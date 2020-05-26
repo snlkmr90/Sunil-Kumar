@@ -25,21 +25,21 @@
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-			post <small>post Listing</small>
+			Post <small>Post Listing</small>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?= base_url('admin/dashboard'); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">eCommerce</a>
+						<a href="#">Posts</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">post</a>
+						<a href="#">List Posts</a>
 					</li>
 				</ul>
 			</div>
@@ -63,8 +63,8 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-container">
-								<table class="table table-striped table-bordered table-hover" id="datatable_products">
+							<div class="table-container" style="overflow-x:auto;">
+								<table class="table table-striped table-bordered table-hover table-responsive" id="datatable_products">
 								<thead>
 								<tr role="row" class="heading">
 									<th width="15%">
@@ -74,12 +74,15 @@
 										 Post Category
 									</th>
 									<th width="15%">
-										 Post Status
+										 Post Type
 									</th>
 									<th width="15%">
+										 Post Status
+									</th>
+									<th width="20%">
 										 Date&nbsp;Created
 									</th>
-									<th width="10%">
+									<th width="20%">
 										 Actions
 									</th>
 								</tr>
@@ -100,7 +103,16 @@
 			                             echo form_dropdown('post_cat', $options, (isset($admin_post_filter['post_cat']) && $admin_post_filter['post_cat'] !=null )?$admin_post_filter['post_cat']:set_value('post_cat'),'class="table-group-action-input form-control"'); 
                              		?>
                              		</td>
-
+									<td>
+										<?php 
+				                            $options = [
+				                            		''    => 'Select',
+				                                    '1'  => 'Featured',
+				                                    '0'  => 'Non-Featured',
+				                                    
+				                            ];
+                             				echo form_dropdown('post_featured', $options, isset($admin_post_filter)?$admin_post_filter['post_featured']:'','class="form-control form-filter input-sm"'); ?>
+									</td>
 									<td>
 										<?php 
 				                            $options = [
@@ -139,8 +151,8 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-container">
-								<table class="table table-striped table-bordered table-hover" id="datatable_products">
+							<div class="table-container" style="overflow-x:auto;">
+								<table class="table table-striped table-bordered table-hover table-responsive" id="datatable_products">
 								<thead>
 								<tr role="row" class="heading">
 									<th width="10%">
@@ -153,12 +165,15 @@
 										 Post Category
 									</th>
 									<th width="15%">
-										 Post Status
+										 Featured
 									</th>
 									<th width="15%">
-										 Date&nbsp;Created
+										 Post Status
 									</th>
 									<th width="10%">
+										 Date&nbsp;Created
+									</th>
+									<th width="20%">
 										 Actions
 									</th>
 								</tr>
@@ -170,7 +185,8 @@
 											<td><?= $post->post_id;?></td>
 											<td><?= $post->post_name;?></td>
 											<td><?= $post->cat_name;?></td>
-											<td><?= ($post->post_status !=null && $post->post_status ==1 )?'<span class="alert-success">Active</span>':'<span class="text-danger">Inactive</span>';?></td>
+											<td><?= ($post->post_featured !=null && $post->post_featured ==1 )?'<span class="label label-sm label-success">Yes</span>':'<span class="label label-sm label-danger">No</span>';?></td>
+											<td><?= ($post->post_status !=null && $post->post_status ==1 )?'<span class="label label-sm label-success">Active</span>':'<span class="label label-sm label-danger">Inactive</span>';?></td>
 											<td><?= $post->post_created_at;?></td>
 											<td>
 												<div class="margin-bottom-5">

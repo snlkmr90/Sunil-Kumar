@@ -10,10 +10,15 @@ class Category extends CI_Controller {
 			$this->load->library(['template']);
 			$this->load->helper(['url','form']);
 			$this->load->library(['form_validation','email','pagination']);
-			$this->load->model(['category_model']);
+			$this->load->model(['category_model','blog_model']);
 	}
-	public function index($cat_slug)
+	public function index($cat_slug='')
 	{
+		if (!$cat_slug)
+			{				// redirect them to the login page
+				redirect(base_url(), 'refresh');
+				exit();
+			}
 		$cat_obj=$this->category_model->get_cat_data($cat_slug); 
 		$cat_id = $cat_obj->cat_id;
 	    $config = array();

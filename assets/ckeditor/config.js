@@ -17,6 +17,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
 	config.filebrowserUploadMethod = 'form'; // Added for file browser
+	config.entities_latin = false; 
+  	config.entities_greek = false; 
+  	config.entities = false; 
+  	config.basicEntities = false; 
 };
 
 

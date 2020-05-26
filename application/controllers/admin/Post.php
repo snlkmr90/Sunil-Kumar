@@ -28,6 +28,7 @@ class Post extends CI_Controller {
 			$searchdata['post_status'] = trim($this->input->post('post_status',TRUE));
 			$searchdata['post_created_from'] = trim($this->input->post('post_created_from',TRUE));
 			$searchdata['post_created_to'] = trim($this->input->post('post_created_to',TRUE));
+			$searchdata['post_featured'] = trim($this->input->post('post_featured',TRUE));
 			$searchdata['post_cat'] = trim($this->input->post('post_cat',TRUE));
 			$this->session->set_userdata('admin_post_filter',$searchdata);
 			$data['admin_post_filter'] =  $this->session->userdata('admin_post_filter');
@@ -107,7 +108,7 @@ class Post extends CI_Controller {
 				    $catData['post_name'] = $this->input->post('post_name',TRUE);
 				    $delimiter ='-';
 				    $catData['post_slug'] = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $catData['post_name']))))), $delimiter));
-				    $catData['post_description'] = $this->input->post('post_description',TRUE);
+				    $catData['post_description'] = $this->input->post('post_description',FALSE);
 				    $catData['post_cat'] = $this->input->post('post_cat',TRUE);
 				    $catData['post_featured'] = $this->input->post('post_featured',TRUE);
 				    $catData['post_meta_title'] = $this->input->post('post_meta_title',TRUE);
@@ -147,9 +148,9 @@ class Post extends CI_Controller {
 		    		mkdir($uppath,0775,TRUE);
 		    	}
 		        $config['upload_path'] = $uppath;
-		        $config['allowed_types'] = 'gif|jpg|png';
-		        $config['max_width']            = 6000; // 6000px you can set the value you want
-				$config['max_height']           = 6000; // 6000px
+		        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+		        /*$config['max_width']            = 6000; // 6000px you can set the value you want
+				$config['max_height']           = 6000; // 6000px*/
 		        $config['max_size']             = 10024; // 10mb you can set the value you want
 		        $ext = explode(".", $_FILES["post_feat_img"]["name"]);
 		        $new_name = uniqid().'.'.end($ext);
@@ -176,7 +177,7 @@ class Post extends CI_Controller {
 			    $catData['post_name'] = $this->input->post('post_name',TRUE);
 			    $delimiter ='-';
 			    $catData['post_slug'] = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $catData['post_name']))))), $delimiter));
-			    $catData['post_description'] = $this->input->post('post_description',TRUE);
+			    $catData['post_description'] = $this->input->post('post_description',FALSE);
 			    $catData['post_meta_title'] = $this->input->post('post_meta_title',TRUE);
 			    $catData['post_featured'] = $this->input->post('post_featured',TRUE);
 			    $catData['post_keyword'] = $this->input->post('post_keyword',TRUE);
@@ -194,9 +195,9 @@ class Post extends CI_Controller {
 	}
 	public function resize($path, $file)
 	{ 
-	    $width = array(255, 825, 325);
-	    $height = array(212, 474, 270);
-	    $resizepath = array('255x212','825x474','325x270');
+	    $width = array(255, 825, 325, 55);
+	    $height = array(212, 474, 270, 46);
+	    $resizepath = array('255x212','825x474','325x270', '55X46');
 	    $rescount = count($resizepath);
 	    $this->load->library('image_lib');
 	    
@@ -209,7 +210,7 @@ class Post extends CI_Controller {
 	       $config['image_library']    = 'gd2';
 	       $config['source_image']     = $path;
 	       $config['create_thumb']     = false;
-	       $config['maintain_ratio']   = false;
+	       $config['maintain_ratio']   = true;
 	       $config['width']            = $width[$i];
 	       $config['height']           = $height[$i];   
 	       $config['new_image']        = $uppath.'/'.$file;

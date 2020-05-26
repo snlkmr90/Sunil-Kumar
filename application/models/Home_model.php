@@ -52,6 +52,20 @@ class Home_model extends CI_Model
 			return true;
 		}
 	}
+	public function postcontact($contactdata)
+	{
+		$this->db->insert('contacts',$contactdata);
+		if($this->db->affected_rows()> 0){
+			return true;
+		}
+	}
+	public function postwriteus($writeusdata)
+	{
+		$this->db->insert('writeus',$writeusdata);
+		if($this->db->affected_rows()> 0){
+			return true;
+		}
+	}
 	public function get_header_category(){
 		$this->db->select('bc.cat_slug,bc.cat_name,(bp.post_cat) as totalcatposts');
 		$this->db->from('blog_category bc');
@@ -65,7 +79,7 @@ class Home_model extends CI_Model
 		}
 	}
 	public function get_footer_category(){
-		$this->db->select('bc.cat_slug,bc.cat_name,(bp.post_cat) as totalcatposts');
+		$this->db->select('bc.cat_slug,bc.cat_name,count(bp.post_cat) as totalcatposts');
 		$this->db->from('blog_category bc');
 		$this->db->join('blog_post bp','bp.post_cat =bc.cat_id');
 		$this->db->order_by('totalcatposts','DESC');

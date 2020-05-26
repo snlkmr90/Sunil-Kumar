@@ -127,7 +127,7 @@
         <ul class="page-breadcrumb">
           <li>
             <i class="fa fa-home"></i>
-            <a href="index.html">Home</a>
+            <a href="<?= base_url('admin/dashboard'); ?>">Home</a>
             <i class="fa fa-angle-right"></i>
           </li>
           <li>
@@ -251,7 +251,7 @@
                                 'name' => 'post_description',
                                 'rows' => '2',
                                 'cols' => '50',
-                                'value'=> set_value('post_description'),
+                                'value'=> htmlspecialchars_decode(set_value('post_description')),
                                 'class'=>"form-control"
                             );
                             echo form_textarea($options); ?>

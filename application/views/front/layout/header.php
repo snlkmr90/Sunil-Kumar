@@ -4,7 +4,7 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+    <meta name="google-site-verification" content="RzIILbN0H5Vqz5q6TkamaqNFCbIQi3seCdyaIoCgy1A" />
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -23,23 +23,33 @@
       <title>GuestBlogss - Create|Post|Deploy </title>
       <meta name="keywords" content="">
       <meta name="description" content="">
+    <?php } }elseif($this->router->class=='category' && $this->router->method=='index'){?>
+    <?php if($cat_data){ ?>
+      <title><?php echo $cat_data->cat_meta_title;?></title>
+      <meta name="keywords" content="<?= $cat_data->cat_keyword; ?>">
+      <meta name="description" content="<?= $cat_data->cat_description; ?>">
+    <?php }else{?>
+      <title>GuestBlogss - Create|Post|Deploy </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
     <?php } ?>
-
     <?php }else{ ?>
       <title>GuestBlogss - Create|Post|Deploy </title>
       <meta name="keywords" content="">
       <meta name="description" content="">
     <?php } ?>
-    
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?=base_url('assets/front/')?>images/favicon16x16.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?=base_url('assets/front/')?>images/favicon32x32.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?=base_url('assets/front/')?>images/favicon96x96.png" type="image/x-icon" />
+
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     
     <!-- Design fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet"> 
 
     <!-- Bootstrap core CSS -->
-    <link href="<?=base_url();?>assets/front/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 
     <!-- FontAwesome Icons core CSS -->
     <link href="<?=base_url();?>assets/front/css/font-awesome.min.css" rel="stylesheet">
@@ -60,7 +70,14 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.<?=base_url();?>assets/front/js/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167562370-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-167562370-1');
+</script>
 </head>
 <body>
 
@@ -71,9 +88,13 @@
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand" href="tech-index.html"><img src="images/version/tech-logo.png" alt=""></a>
+                    <a class="navbar-brand" href="tech-index.html">
+                        <?php /*<img src="images/version/tech-logo.png" alt="">*/ ?></a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                            <a href="<?= base_url(); ?>"><img src="<?=base_url('assets/front/')?>images/favicon32x32-blue.png" alt="" class="img-fluid"></a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?=base_url();?>">Home</a>
                             </li>
@@ -438,9 +459,11 @@
                                 <a class="nav-link" href="<?= base_url().'category/'.$menu_cats->cat_slug;?>"><?= $menu_cats->cat_name;?></a>
                             </li>
                             <?php } } ?>                   
-
                             <li class="nav-item">
-                                <a class="nav-link" href="tech-contact.html">Contact Us</a>
+                                <a class="nav-link" href="<?= base_url().'write-for-us';?>">Write For US</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url().'contact-us';?>">Contact Us</a>
                             </li>
                         </ul>
                         <?php /* <ul class="navbar-nav mr-2">

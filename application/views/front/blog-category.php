@@ -6,7 +6,7 @@
                     </div><!-- end col -->
                     <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Blog</a></li>
                             <li class="breadcrumb-item active"><?= $cat_data->cat_name; ?></li>
                         </ol>
@@ -22,7 +22,7 @@
                         <div class="page-wrapper">
                             <div class="blog-list clearfix">
                                 <?php if($list_blog_posts){ foreach($list_blog_posts as $list_blog_post){ ?>
-                                <div class="blog-box row">
+                                <div class="border-custom blog-box row">
                                     <div class="col-md-4">
                                         <div class="post-media">
                                             <a href="<?= base_url().'blog/'.$list_blog_post->post_slug; ?>" title="">
@@ -39,7 +39,7 @@
                                         <p><?php if(strlen(strip_tags(htmlspecialchars_decode($list_blog_post->post_description))) > 200){echo substr(strip_tags(htmlspecialchars_decode($list_blog_post->post_description)), 0,200).'..[...]';}else{ echo htmlspecialchars_decode(strip_tags($list_blog_post->post_description)); } ?></p>
                                         <small class="firstsmall"><a class="bg-orange" href="<?= base_url().'category/'.$list_blog_post->cat_slug; ?>" title=""><?= $list_blog_post->cat_name; ?></a></small>
                                         <small><a href="<?= 'blog/'.$list_blog_post->post_slug; ?>" title=""><?= date('d, M Y', strtotime($list_blog_post->post_created_at)); ?></a></small>
-                                        <small><a href="tech-author.html" title="">by Admin</a></small>
+                                        <small><a href="#" title="">by Admin</a></small>
                                         <small><a href="<?= 'blog/'.$list_blog_post->post_slug; ?>" title=""><i class="fa fa-eye"></i> <?= $list_blog_post->viewcount; ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->
@@ -62,6 +62,7 @@
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
+                            <?php $this->load->view('front/common-sidebar'); ?>
                             <div class="widget">
                                 <h2 class="widget-title">Follow Us</h2>
 
@@ -80,14 +81,14 @@
                                 </div>
                             </div><!-- end widget -->
                             
-                            <div class="widget">
+                            <?php /* <div class="widget">
                                 <div class="banner-spot clearfix">
                                     <div class="banner-img">
                                         <img src="upload/banner_07.jpg" alt="" class="img-fluid">
                                     </div><!-- end banner-img -->
                                 </div><!-- end banner -->
                             </div><!-- end widget -->
-                            <?php /*
+                            
                             <div class="widget">
                                 <h2 class="widget-title">Trend Videos</h2>
                                 <div class="trend-videos">

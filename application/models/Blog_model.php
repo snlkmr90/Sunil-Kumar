@@ -94,14 +94,30 @@ class Blog_model extends CI_Model
 	}
 	public function save_view($viewdata){
 		$this->db->insert('post_views',$viewdata);
+		return true;
 	}
 	public function get_views_count($post_id){
-		$this->db->select('count(view_post_id) as totalviews');
+		$this->db->select('*,count(view_post_id) as totalviews');
 		$this->db->from('post_views');
 		$this->db->where('view_post_id',$post_id);
 		$query=$this->db->get();
 		/*echo $this->db->last_query();
 		die;*/
-		return $query->num_rows();	
+		return $query->row();	
+	}
+
+	public function get_popular_posts(){
+		$this->db->select('p.*,c.cat_name,c.cat_slug, pv.*,count(pv.view_post_id) as viewcount');
+		$this->db->from('blog_post p');
+		$this->db->join('blog_category c','c.cat_id = p.post_cat','left');
+		$this->db->join('post_views pv','pv.view_post_id = p.post_id','left');
+		$this->db->where('p.post_status',1);
+		$this->db->order_by('viewcount','desc');
+		$this->db->group_by('p.post_id');
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+			return $query->result();
+		}
 	}
 }

@@ -78,7 +78,13 @@ jQuery(document).ready(function() {
          $('#cat_created_from').datepicker({format: 'yyyy-mm-dd'});
          $('#post_created_from').datepicker({format: 'yyyy-mm-dd'});
          $('#post_created_to').datepicker({format: 'yyyy-mm-dd'});
-
+         $('#comment_created_from').datepicker({format: 'yyyy-mm-dd'});
+         $('#comment_created_to').datepicker({format: 'yyyy-mm-dd'});
+         $('#contact_created_from').datepicker({format: 'yyyy-mm-dd'});
+         $('#contact_created_to').datepicker({format: 'yyyy-mm-dd'});
+         $('#writeus_created_from').datepicker({format: 'yyyy-mm-dd'});
+         $('#writeus_created_to').datepicker({format: 'yyyy-mm-dd'});
+         
       });
    </script>
 <!-- END JAVASCRIPTS -->

@@ -30,6 +30,9 @@ class Post_model extends CI_Model
 			if($searchdata['post_cat'] != ''){
 				$this->db->where('post_cat',$searchdata['post_cat']);
 			}
+			if($searchdata['post_featured'] != ''){
+				$this->db->where('post_featured',$searchdata['post_featured']);
+			}
 			if($searchdata['post_status'] != ''){
 				$this->db->where('post_status',$searchdata['post_status']);
 			}
@@ -51,6 +54,8 @@ class Post_model extends CI_Model
 		}
 		$this->db->order_by('post_id','desc');
 		$query=$this->db->get();
+		/*echo $this->db->last_query();
+		die;*/
 		if($query->num_rows()>0)
 		{
 			return $query->result();
